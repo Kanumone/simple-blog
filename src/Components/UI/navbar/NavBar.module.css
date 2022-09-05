@@ -1,0 +1,14 @@
+.navbar {
+    width: 100%;
+    background: rgba(0, 180, 163, 0.4);
+    display: flex;
+    justify-content: flex-end;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.navbar__link {
+    margin: 0 10px;
+    text-decoration: none;
+    color: black;
+}
