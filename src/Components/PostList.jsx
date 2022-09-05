@@ -11,7 +11,7 @@ export default function PostList(props) {
         return (
             <div className="post__list">
                 <h1>{props.title}</h1>
-                {props.posts.map((post, index) => <PostItem number={index + 1} removePost={props.removePost} post={post} key={post.id}/>)}
+                {props.posts.map((post) => <PostItem removePost={props.removePost} post={post} key={post.id}/>)}
             </div>
         );
     }
