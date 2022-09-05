@@ -43,3 +43,16 @@
 .post__list h1 {
     align-self: center;
 }
+
+.page__wrapper {
+    display: flex;
+    margin: 15px 0;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.current__page {
+    border: 1px solid orangered;
+    font-weight: bold;
+    color: orangered;
+}
