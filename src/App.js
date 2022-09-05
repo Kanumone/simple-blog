@@ -9,24 +9,21 @@ import {usePosts} from "./hooks/usePosts";
 import PostService from "./API/PostService";
 import Loader from "./Components/UI/loader/Loader";
 import {useFetching} from "./hooks/useFetching";
-import {getPageCount, getPagesArray} from "./utils/pages";
+import Pagination from "./Components/UI/pagination/Pagination";
 
 function App() {
     const [posts, setPosts] = React.useState([]);
     const [filter, setFilter] = React.useState({sortOption: '', searchQuery: ''});
     const [modal, setModal] = React.useState(false);
-    const [totalPages, setTotalPages] = React.useState(0);
     const [limit, setLimit] = React.useState(10);
     const [page, setPage] = React.useState(1);
+    const [totalPosts, setTotalPosts] = React.useState(0)
     const postList = usePosts(posts, filter.sortOption, filter.searchQuery);
-
-    const pagesArray = getPagesArray(totalPages);
 
     const [fetchPosts, isLoading, errorMsg] = useFetching(async () => {
         const res = await PostService.getAll(limit, page);
         setPosts(res.data);
-        const totalPosts = res.headers['x-total-count'];
-        setTotalPages(getPageCount(totalPosts, limit));
+        setTotalPosts(Number(res.headers['x-total-count']));
     })
 
     function createPost(newPost) {
@@ -62,15 +59,12 @@ function App() {
                     title="Посты про JS"
                     />
             }
-            <div className="page__wrapper">
-                {pagesArray.map(p =>
-                    <MyButton
-                        key={p}
-                        onClick={() => setPage(p)}
-                        addClass={p === page ? 'current__page' : ''}
-                    >{p}</MyButton>
-                )}
-            </div>
+            <Pagination
+                page={page}
+                setPage={setPage}
+                totalPosts={totalPosts}
+                limit={limit}
+            />
         </div>
     );
 
