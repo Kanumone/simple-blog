@@ -5,7 +5,7 @@ import {useFetching} from "../../hooks/useFetching";
 import Loader from "../UI/loader/Loader";
 import Comments from "../Comment";
 
-const Post = () => {
+const PostPage = () => {
     const postId = useParams().id;
     const [post, setPost] = useState({});
     const [comments, setComments] = useState([]);
@@ -35,4 +35,4 @@ const Post = () => {
     );
 };
 
-export default Post;
+export default PostPage;
